@@ -28,6 +28,7 @@ a {
   height: 100vh !important;
   margin: 0 !important;
   background-color: rgba(0,0,0,0.02) !important;
+  border: none !important;
 }
 .orgchart {
   min-height: 200vh;
