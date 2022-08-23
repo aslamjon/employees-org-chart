@@ -16,8 +16,7 @@
     "next-transpile-modules": "^9.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-organizational-chart": "^2.1.1",
-    "simplebar-react": "^2.4.1",
+    "react-org-chart-for-next": "github:aslamjon/react-org-chart-for-next",
     "styled-components": "^5.3.5"
   },
   "devDependencies": {

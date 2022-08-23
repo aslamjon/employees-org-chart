@@ -1,91 +1,227 @@
-import React from "react";
-import styled from "styled-components";
-import dynamic from "next/dynamic";
-import TreeItem from "../components/treeItem";
-import { get, isEmpty } from "lodash";
-
-const StyledNode = styled.div`
-  padding: 8px 15px;
-  border-radius: 4px;
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #dfe3e8;
-  box-shadow: 0px 15px 24px -16px rgba(15, 15, 15, 0.2);
-`;
-
-let Tree;
-
-if (process.browser) {
-  Tree = dynamic(() => import("react-organizational-chart").then((mod) => mod.Tree));
-}
-
-let childKey = "children";
-let nameKey = "person.name";
-let idKey = "id";
-
-const StyleItem = styled.div`
-  width: 150px;
-  margin-left: 15px;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #dfe3e8;
-  box-shadow: 0px 15px 24px -16px rgba(15, 15, 15, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  .img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    img {
-      width: 100%;
-    }
-  }
-  .name {
-    font-weight: 500;
-    margin: 10px 0;
-  }
-  .department {
-    font-weight: 300;
-    font-size: 13px;
-    margin-top: 5px;
-  }
-`;
-
-const ChildrenTree = (options, ids = []) =>
-  !isEmpty(options) &&
-  options?.map((item) => (
-    <TreeItem
-      key={item[idKey]}
-      header={
-        <StyleItem>
-          <div className="img">
-            <img src="avator.svg" alt="" />{" "}
-          </div>
-          <div className="name">{get(item, nameKey, "")}</div>
-          <div className="department">{get(item, "person.department", get(item, "person.department.name", ""))}</div>
-        </StyleItem>
-      }
-      childItems={ChildrenTree(get(item, childKey, []))}
-    />
-  ));
-
-const Body = ({ data }) => (
-  <Tree
-    lineHeight="40px"
-    lineWidth={"2px"}
-    lineColor={"#dfe3e8"}
-    lineBorderRadius={"10px"}
-    nodePadding={"10px"}
-    label={<StyledNode>Root</StyledNode>}
-  >
-    {ChildrenTree(data.employees)}
-  </Tree>
-);
-
-const TreeComponent = (props) => {
-  return typeof window !== "undefined" && <Body {...props} />;
+export const tree = {
+  id: 100,
+  person: {
+    id: 100,
+    avatar: "avatar.svg",
+    department: "",
+    name: "Henry monger",
+    title: "Manager",
+    totalReports: 3,
+  },
+  hasChild: true,
+  hasParent: true,
+  children: [
+    {
+      id: 36,
+      person: {
+        id: 36,
+        avatar: "avatar.svg",
+        department: "",
+        name: "Tomasz polaski",
+        title: "IT Specialist",
+        totalReports: 4,
+      },
+      hasChild: true,
+      hasParent: true,
+      children: [],
+    },
+  ],
 };
 
-export default TreeComponent;
+export const tree1 = [
+  {
+    id: 36,
+    person: {
+      id: 36,
+      avatar: "avatar.svg",
+      department: "",
+      name: "Tomasz polaski",
+      title: "IT Specialist",
+      totalReports: 4,
+    },
+    hasChild: true,
+    hasParent: true,
+    children: [],
+  },
+  {
+    id: 32,
+    person: {
+      id: 32,
+      avatar: "avatar.svg",
+      department: "",
+      name: "Emanuel walker",
+      title: "IT Specialist",
+      totalReports: 0,
+    },
+    hasChild: true,
+    hasParent: true,
+    children: [],
+  },
+  {
+    id: 25,
+    person: {
+      id: 25,
+      avatar: "avatar.svg",
+      department: "",
+      name: "Kerry peter",
+      title: "IT Specialist",
+      totalReports: 3,
+    },
+    hasChild: true,
+    hasParent: true,
+    // children: [],
+  },
+];
+
+export const tree2 = [
+  {
+    id: 56,
+    person: {
+      id: 56,
+      avatar: "avatar.svg",
+      department: "",
+      name: "Sam John",
+      title: "HR",
+      totalReports: 2,
+      link: "https://github.com/unicef/react-org-chart",
+    },
+    hasChild: true,
+    hasParent: true,
+    // children: [],
+  },
+  {
+    id: 66,
+    person: {
+      id: 66,
+      avatar: "avatar.svg",
+      department: "",
+      name: "John doe",
+      title: "Developer",
+      totalReports: 0,
+      link: "https://github.com/unicef/react-org-chart",
+    },
+    hasChild: true,
+    hasParent: true,
+    children: [],
+  },
+  {
+    id: 76,
+    person: {
+      id: 76,
+      avatar: "avatar.svg",
+      department: "",
+      name: "Emilia rogers",
+      title: "Developer",
+      totalReports: 0,
+      link: "https://github.com/unicef/react-org-chart",
+    },
+    hasChild: true,
+    hasParent: true,
+    children: [],
+  },
+  {
+    id: 60,
+    person: {
+      id: 60,
+      avatar: "avatar.svg",
+      department: "",
+      name: "Ellen cott",
+      title: "IT Officer",
+      totalReports: 0,
+    },
+    hasChild: false,
+    hasParent: true,
+    children: [],
+  },
+];
+
+export const tree3 = [
+  {
+    id: 70,
+    person: {
+      id: 70,
+      avatar: "avatar.svg",
+      department: "",
+      name: "Kenneth dom",
+      title: "IT Officer",
+      totalReports: 0,
+    },
+    hasChild: false,
+    hasParent: true,
+    children: [],
+  },
+  {
+    id: 45,
+    person: {
+      id: 45,
+      avatar: "avatar.svg",
+      department: "",
+      name: "Kin baker",
+      title: "IT Officer",
+      totalReports: 0,
+    },
+    hasChild: false,
+    hasParent: true,
+    children: [],
+  },
+];
+
+export const tree4 = [
+  {
+    id: 102,
+    person: {
+      id: 102,
+      avatar: "avatar.svg",
+      department: "",
+      name: "Hendy kinger",
+      title: "Manager",
+      totalReports: 0,
+    },
+    hasChild: true,
+    hasParent: true,
+    children: [],
+  },
+  {
+    id: 455,
+    person: {
+      id: 455,
+      avatar: "avatar.svg",
+      department: "",
+      name: "Kate baker",
+      title: "IT Officer",
+      totalReports: 0,
+    },
+    hasChild: false,
+    hasParent: true,
+    children: [],
+  },
+  {
+    id: 444,
+    person: {
+      id: 444,
+      avatar: "avatar.svg",
+      department: "",
+      name: "John medis",
+      title: "IT Officer",
+      totalReports: 0,
+    },
+    hasChild: false,
+    hasParent: true,
+    children: [],
+  },
+
+  {
+    id: 456,
+    person: {
+      id: 456,
+      avatar: "avatar.svg",
+      department: "",
+      name: "Brett lee",
+      title: "IT Officer",
+      totalReports: 0,
+    },
+    hasChild: false,
+    hasParent: true,
+    children: [],
+  },
+];
